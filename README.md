@@ -53,3 +53,20 @@ See [verification checklist](docs/verification-checklist.md) for what is confirm
 4. Recreate a sandbox environment using Terraform and Azure with cost guardrails.
 
 > This is a learning lab. It is not affiliated with or built on employer infrastructure or employer data.
+
+## Projects
+
+### Docker Containerization & Secure Web Deployment
+
+Built and deployed a custom Nginx Docker image on an Ubuntu Server virtual machine using Docker Compose.
+
+**Technologies:** Docker, Docker Compose, Nginx, Ubuntu Server, Linux, SSH
+
+**Skills demonstrated:**
+- Building custom Docker images
+- Container lifecycle management
+- Configuring Docker Compose
+- Container networking and port mapping
+- Secure remote access using SSH tunneling
+
+[View Docker Project](docker-containerization/README.md)
