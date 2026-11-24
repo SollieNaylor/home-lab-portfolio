@@ -1,0 +1,7 @@
+NEXT STEPS — HOME LAB PORTFOLIO
+
+1. Unzip to Linux Mint and review README.md and both project write-ups.
+2. Confirm Ubuntu's actual OS version and capture sanitized SSH, UFW, Nginx evidence.
+3. Run the Ansible playbook twice and capture its play recaps (changed=0 if achieved).
+4. Review the safe sample inventory and playbook against your deployed versions.
+5. Use docs/publish-to-github.md to publish when ready; use a private repository initially if preferred.

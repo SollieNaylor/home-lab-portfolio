@@ -1,0 +1,32 @@
+# Credentials and local machine files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.retry
+.vault_pass
+.vault_password*
+**/.ssh/
+id_rsa
+id_ed25519
+id_ecdsa
+inventory.ini
+*.secret.yml
+secrets.yml
+
+# Python and editor artifacts
+__pycache__/
+*.py[cod]
+.venv/
+.vscode/
+.idea/
+.DS_Store
+
+# Optional, local snapshots/logs
+*.log
+*.qcow2
+*.img
+*.iso

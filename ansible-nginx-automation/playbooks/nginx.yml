@@ -1,0 +1,39 @@
+---
+# Reference playbook reconstructed from the lab exercise.
+# Compare to your working deployed playbook before publishing claims.
+- name: Configure Ubuntu web server
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Ensure Nginx is running and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Deploy home lab webpage
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <title>Home Lab</title>
+          </head>
+          <body>
+            <h1>Lab01 - Managed by Ansible</h1>
+            <p>My first automated deployment!</p>
+          </body>
+          </html>
