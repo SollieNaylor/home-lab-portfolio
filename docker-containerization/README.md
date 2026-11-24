@@ -36,7 +36,7 @@ docker-containerization/
 ├── compose.yaml
 ├── site/
 │   └── index.html
-└── screenshots/          # Add sanitized evidence images here
+└── screenshots/          
 ```
 
 The `Dockerfile`, `compose.yaml`, and `site/index.html` in this repository are the source files used in the lab. The application is intentionally simple so the emphasis stays on deployment, operations, and networking.
@@ -85,7 +85,7 @@ During the lab, I tested the Docker installation with the `hello-world` image, s
 | `docker compose ps` and HTTP 200 response | `04-docker-compose-deployment.png` | Declarative deployment |
 | Browser showing custom page on localhost:8081 | `05-custom-docker-website.png` | Completed application deployment |
 
-Do not publish screenshots until usernames, IP addresses, tokens, host identifiers, or other details you do not want public have been reviewed and redacted. Only link screenshots here once those files actually exist in the repository.
+
 
 ## Troubleshooting and lessons learned
 
