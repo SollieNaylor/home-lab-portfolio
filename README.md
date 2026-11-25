@@ -35,6 +35,12 @@ Built a custom Nginx image and deployed a static site using Docker Compose. Used
 
 **Skills:** Docker · Docker Compose · container networking · port mapping · SSH tunneling
 
+### 04 · [Terraform Azure Network Infrastructure](terraform-azure-network/README.md)
+
+Provisioned nine Azure resources using Terraform: a resource group, VNet, two subnets, two NSGs, an inbound web-to-backend deny rule, and both subnet-to-NSG associations. Verified subnet outbound settings and rule configuration with Azure CLI. After deployment, `terraform plan` reported no changes.
+
+**Skills:** Terraform · Azure Virtual Network · Azure CLI · NSGs · Infrastructure as Code · drift detection
+
 ## Architecture
 
 ```mermaid
@@ -59,7 +65,7 @@ Each project has its own README with goals, implementation, architecture, troubl
 
 - Add verified screenshots of Ansible playbook runs, firewall state, and Docker deployment
 - Test Ansible idempotency and capture a second-run `changed=0` recap
-- Learn Terraform infrastructure as code, followed by an Azure sandbox with budget limits
+- Capture redacted Terraform/Azure evidence; validate exact source against the deployed working directory, and perform controlled infrastructure teardown
 - Expand networking, Linux troubleshooting, and monitoring projects
 
-[Draft of the GitHub profile README](docs/github-profile-README.md) — ready to copy into a public repository named `SollieNaylor` when that profile repository is created.
+[GitHub profile](https://github.com/SollieNaylor) — featuring personal infrastructure projects.
