@@ -37,7 +37,7 @@ Built a custom Nginx image and deployed a static site using Docker Compose. Used
 
 ### 04 · [Terraform Azure Network Infrastructure](terraform-azure-network/README.md)
 
-Provisioned nine Azure resources using Terraform: a resource group, VNet, two subnets, two NSGs, an inbound web-to-backend deny rule, and both subnet-to-NSG associations. Verified subnet outbound settings and rule configuration with Azure CLI. After deployment, `terraform plan` reported no changes.
+Provisioned nine Azure resources using Terraform: a resource group, VNet, two subnets, two NSGs, an inbound web-to-backend deny rule, and both subnet-to-NSG associations. Verified subnet outbound settings and rule configuration with Azure CLI. After deployment, `terraform plan` reported no changes. Completed a controlled Terraform teardown of all nine resources and verified that the resource group no longer existed and state was empty.
 
 **Skills:** Terraform · Azure Virtual Network · Azure CLI · NSGs · Infrastructure as Code · drift detection
 
@@ -65,7 +65,7 @@ Each project has its own README with goals, implementation, architecture, troubl
 
 - Add verified screenshots of Ansible playbook runs, firewall state, and Docker deployment
 - Test Ansible idempotency and capture a second-run `changed=0` recap
-- Capture redacted Terraform/Azure evidence; validate exact source against the deployed working directory, and perform controlled infrastructure teardown
+- Capture redacted Terraform/Azure evidence and compare the published reference `main.tf` against the local deployed configuration
 - Expand networking, Linux troubleshooting, and monitoring projects
 
 [GitHub profile](https://github.com/SollieNaylor) — featuring personal infrastructure projects.
