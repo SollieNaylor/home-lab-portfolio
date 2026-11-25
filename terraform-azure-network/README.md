@@ -1,7 +1,7 @@
 # Project 04 — Terraform Azure Network Infrastructure
 
 **Type:** Independent personal home lab  
-**Status:** Azure deployment completed and verified; teardown not yet recorded  
+**Status:** Completed — deployment, verification, drift check, and teardown verified on November 25, 2026  
 **Environment:** Linux Mint workstation, Terraform CLI, Azure CLI, AzureRM provider  
 **Region:** South Central US (`southcentralus`)
 
@@ -10,7 +10,8 @@
 Provisioned Azure networking resources from declarative Terraform configuration. Created a resource group, VNet, separate web/backend subnets, two network security groups, a restrictive inbound rule on the backend NSG, and associations between each subnet and its NSG.
 
 **Observed deployment result:** `Apply complete! Resources: 9 added, 0 changed, 0 destroyed.`  
-**Observed drift check:** `No changes. Your infrastructure matches the configuration.`
+**Observed drift check:** `No changes. Your infrastructure matches the configuration.`  
+**Observed teardown:** `Destroy complete! Resources: 9 destroyed.`; Azure resource group existence returned `false`, and `terraform state list` returned no resources.
 
 This project demonstrates Terraform planning and deployment, Azure virtual networking, network security policy configuration, and drift detection. It uses a personal Azure environment, not employer infrastructure.
 
@@ -52,6 +53,8 @@ The diagram represents configuration and control relationships, not live packet 
 7. Applied the plan, which reported **9 added / 0 changed / 0 destroyed**.
 8. Re-ran `terraform plan`; state refresh reported **no changes**.
 9. Verified deployed subnet settings, NSG associations, and inbound deny rule with Azure CLI.
+10. Reviewed `terraform plan -destroy` (`0 to add, 0 to change, 9 to destroy`) and completed `terraform destroy` (`9 destroyed`).
+11. Confirmed `az group exists --name rg-homelab-network-dev` returned `false` and `terraform state list` returned no managed resources.
 
 ## Verification evidence
 
@@ -69,7 +72,10 @@ The diagram represents configuration and control relationships, not live packet 
 | Backend subnet NSG | `nsg-backend` | Verified via Azure CLI |
 | Backend inbound deny rule | `DenyWebToBackend`, `Deny`, `Inbound`, source `10.10.1.0/24`, priority `100` | Verified via Azure CLI |
 | Real network traffic blocked | Not tested: no compute resources deployed | Pending |
-| `terraform destroy` and Azure cleanup | Not yet performed | Pending |
+| Pre-destroy Terraform plan | `Plan: 0 to add, 0 to change, 9 to destroy.` | Verified |
+| `terraform destroy` | `Destroy complete! Resources: 9 destroyed.` | Verified |
+| Azure resource group cleanup | `az group exists --name rg-homelab-network-dev` returned `false` | Verified via Azure CLI |
+| Local Terraform state cleanup | `terraform state list` returned no resources | Verified |
 
 **Subnet CIDR verification:** The first Azure CLI table did not display CIDRs because it selected `addressPrefix` (singular). A subsequent `addressPrefixes` query returned `10.10.1.0/24` for `snet-web` and `10.10.2.0/24` for `snet-backend`, both with `defaultOutboundAccess` set to `false`.
 
@@ -99,7 +105,7 @@ terraform plan
 # Review and approve the plan before running terraform apply.
 ```
 
-To manage the live environment safely, preserve the original local `terraform.tfstate` in the working directory (do not publish it) and use the same Terraform configuration that created the environment.
+The Azure lab has been destroyed. To recreate it, review the configuration against your local working copy, authenticate to your personal Azure subscription, inspect a fresh `terraform plan`, and apply only after confirming the intended scope. Keep Terraform state local/private and never commit it.
 
 ## Security and cost boundaries
 
@@ -113,6 +119,6 @@ To manage the live environment safely, preserve the original local `terraform.tf
 
 Terraform creates and tracks infrastructure, while Ansible manages software and configuration on existing systems. Here, Terraform demonstrated provisioning, state refresh, verification against real Azure resources, and detection of configuration drift.
 
-Remaining steps: capture redacted deployment screenshots, perform an approved `terraform destroy` using the original local state, and verify the lab resources were removed from Azure.
+The lab was successfully destroyed and cleanup verified on November 25, 2026. Remaining portfolio housekeeping: capture/redact screenshots and compare the published reference `main.tf` with the authoritative local configuration.
 
-**Recruiter summary:** Provisioned and verified a segmented Azure virtual network using Terraform, including two subnets, NSGs, a custom inbound deny rule, and a successful zero-drift plan after deployment.
+**Recruiter summary:** Provisioned, verified, and cleanly decommissioned nine Azure networking resources with Terraform, including two subnets, NSGs, a custom inbound deny rule, and zero-drift validation.
