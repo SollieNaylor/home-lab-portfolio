@@ -63,13 +63,15 @@ The diagram represents configuration and control relationships, not live packet 
 | `terraform plan` after deployment | `No changes. Your infrastructure matches the configuration.` | Verified |
 | Web subnet `defaultOutboundAccess` | `False` | Verified via Azure CLI |
 | Backend subnet `defaultOutboundAccess` | `False` | Verified via Azure CLI |
+| Web subnet CIDR | `10.10.1.0/24` from `addressPrefixes` | Verified via Azure CLI |
+| Backend subnet CIDR | `10.10.2.0/24` from `addressPrefixes` | Verified via Azure CLI |
 | Web subnet NSG | `nsg-web` | Verified via Azure CLI |
 | Backend subnet NSG | `nsg-backend` | Verified via Azure CLI |
 | Backend inbound deny rule | `DenyWebToBackend`, `Deny`, `Inbound`, source `10.10.1.0/24`, priority `100` | Verified via Azure CLI |
 | Real network traffic blocked | Not tested: no compute resources deployed | Pending |
 | `terraform destroy` and Azure cleanup | Not yet performed | Pending |
 
-**Why the Azure subnet listing lacked CIDR prefixes:** The query selected `addressPrefix` (singular); Azure returns `addressPrefixes` for these subnets. The expected CIDRs were shown in the Terraform plan, but the CLI listing did not independently recheck those CIDR values.
+**Subnet CIDR verification:** The first Azure CLI table did not display CIDRs because it selected `addressPrefix` (singular). A subsequent `addressPrefixes` query returned `10.10.1.0/24` for `snet-web` and `10.10.2.0/24` for `snet-backend`, both with `defaultOutboundAccess` set to `false`.
 
 Example command for a CIDR recheck:
 
@@ -111,6 +113,6 @@ To manage the live environment safely, preserve the original local `terraform.tf
 
 Terraform creates and tracks infrastructure, while Ansible manages software and configuration on existing systems. Here, Terraform demonstrated provisioning, state refresh, verification against real Azure resources, and detection of configuration drift.
 
-Remaining steps: capture redacted deployment screenshots, confirm subnet CIDRs via Azure CLI, perform an approved `terraform destroy` using the original local state, and verify the lab resources were removed from Azure.
+Remaining steps: capture redacted deployment screenshots, perform an approved `terraform destroy` using the original local state, and verify the lab resources were removed from Azure.
 
 **Recruiter summary:** Provisioned and verified a segmented Azure virtual network using Terraform, including two subnets, NSGs, a custom inbound deny rule, and a successful zero-drift plan after deployment.
